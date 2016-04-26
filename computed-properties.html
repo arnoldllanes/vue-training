@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+	<h1>{{ fullName }}</h1>
+	<input type="text" v-model="first"></input>
+	<input type="text" v-model="last"></input>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+
+		<script>
+			new Vue({
+				el: 'body',
+				data: {
+					first: 'Arnold',
+					last: 'Llanes',
+					fullName: 'Arnold Llanes' 
+				},
+				//Computed Property
+				computed: {
+					fullName: function() {
+						return this.first + ' ' + this.last;
+					}
+				}
+
+			});
+
+		</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Training</title>
+
+</head>
+
+<body>
+	<div id="app">
+		<counter subject="Likes"></counter>
+		<counter subject="Dislikes"></counter>
+		<!-- <button type="submit" @click="updateCount" v-model="">
+			Add new chat window: {{ count }}
+		</button>
+
+		<button type="submit" @click="updateCount">
+			Exit chat window: {{ count }}
+		</button>
+
+
+		<span class="error" v-show="count">
+			Can i match this with the counter?
+		</span> -->
+
+	</div>
+	
+	<template id="counter-template">
+		<h1>{{ subject }}</h1>
+
+		<button @click="count += 1">{{ count }}</button>
+	</template>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+
+	<script>
+	Vue.component('counter', {
+		template: '#counter-template',
+		props: ['subject'],
+		data: function() {
+			return { count: 0 };
+		}
+	});
+
+		new Vue ({
+			el: '#app',
+
+		// 	data: {
+		// 		count: 0
+		// 	},
+
+		// 	methods: {
+		// 		updateCount: function() {
+		// 			this.count += 1;
+		// 		}
+		// 	}
+		});
+
+
+	</script>
+
+</body>
+</html>
