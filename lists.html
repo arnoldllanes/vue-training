@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rendering and working with lists</title>
+	<style type="text/css">
+		.completed { text-decoration: line-through; }
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<!-- use the ":" to bind vue to the class attribute to whatever you you say it is-->
+			<!--Apply a class name of "completed" if the condition is true -->
+			<li :class="{ 'completed': task.completed }" 
+				v-for="task in tasks"
+			>
+				{{ task.body }}
+			</li>
+		</ul>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+	<script src="lists.main.js"></script>
+</body>
+</html>

@@ -10,8 +10,16 @@
 
 <body>
 	<div id="app">
-		<counter subject="Likes"></counter>
-		<counter subject="Dislikes"></counter>
+		<counter subject="Likes" inline-template>
+			<h1>{{ subject }}</h1>
+
+		<button @click="count += 1">{{ count }}</button>
+		</counter>
+		<counter subject="Dislikes" inline-template>
+			<h1>{{ subject }}</h1>
+
+		<button @click="count += 1">{{ count }}</button>
+		</counter>
 		<!-- <button type="submit" @click="updateCount" v-model="">
 			Add new chat window: {{ count }}
 		</button>
@@ -26,20 +34,13 @@
 		</span> -->
 
 	</div>
-	
-	<template id="counter-template">
-		<h1>{{ subject }}</h1>
-
-		<button @click="count += 1">{{ count }}</button>
-	</template>
-
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
 
 	<script>
 	Vue.component('counter', {
-		template: '#counter-template',
 		props: ['subject'],
+		
 		data: function() {
 			return { count: 0 };
 		}
