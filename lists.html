@@ -7,17 +7,37 @@
 	</style>
 </head>
 <body>
+	<!--Using a custom component-->
 	<div id="app">
-		<ul>
-			<!-- use the ":" to bind vue to the class attribute to whatever you you say it is-->
+	<!-- list is a property in Vue and defined in the vue.component for this task list -->
+	<!-- ":" binds list property to the data stored in the model called tasks-->
+		<tasks :list="tasks"></tasks>
+	</div>
+
+	<template id="tasks-template">
+		<h1>
+			My Tasks 
+			<span v-show="remaining">({{ remaining }})</span>
+			</h1>
+		<ul v-show="list.length">
+			<!-- use the ":" to bind vue to the class attribute to whatever you you say it is -->
 			<!--Apply a class name of "completed" if the condition is true -->
-			<li :class="{ 'completed': task.completed }" 
-				v-for="task in tasks"
+			<!-- v-for says filter through the property list stated from :list and refer to each one as task  -->
+			<li :class="{ 'completed': task.completed }"
+				v-for="task in list"
+				@click="task.completed = ! task.completed"
 			>
 				{{ task.body }}
+
+				<strong @click="deleteTask(task)">x</strong>
 			</li>
 		</ul>
-	</div>
+		<p v-else>
+			No tasks yet!
+		</p>
+
+		<button @click="clearCompleted"> Clear Completed</button>
+	</template>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
 	<script src="lists.main.js"></script>

@@ -5,39 +5,51 @@
 </head>
 <body>
 	<div v-for="relationship in relationships">
-		<relationship :relationship="relationship" :active.sync="active" inline-template>
-			<div>
-				<span>{{ relationship.type }}</span>
-
-				<button @click="setActiveRelationship" v-show="relationship.type !== active.type">Select
-				</button>
-
-				<span v-else>
-					Selected
-				</span>
-			</div>
-		</relationship>	
+		<relationship :relationship="relationship" :active.sync="active"></relationship>	
 	</div>
 
-	<div>
-		<form>
-			<label for="first">First Name:</label>
-				<input type="text" v-model="first" id="first"></input></br>
-			<label for="last">Last Name:</label>
-				<input type="text" v-model="last" id="last"></input>
-			<button type="submit">Submit</button>
-		</form>		
+	<form>
+		<input type="text" v-model="info.firstName"></input>
+	</form>
+
+	<div v-for="name in info">
+	<!--binds info property into objects of 'name' which is made up in parent iterations of info in v-for-->
+		<nameinputs :info="name"></nameinputs>
 	</div>
 
-	<div v-show="first">
-		<h1>A Message from Arnold</h1>
-		<p>Hi {{ fullName }}, I thank you for taking the time to visit this email form.</p>
-	</div>
+	<template id="relationship-template">
+		<div>
+			<span>{{ relationship.type }}</span>
+
+			<button @click="setActiveRelationship" v-show="relationship.type !== active.type">Select
+			</button>
+
+			<span v-else>
+				Selected
+			</span>
+		</div>
+	</template>
+
+	<template id="name-input">
+		<span> {{ info.firstName }} </span>
+		<span>{{ info.lastName }}</span>
+		<span>{{ info.fullName }}</span>
+	</template>
 
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
 		<script>
+
+		Vue.component('nameinputs', {
+			template: '#name-input',
+
+			props: ['info']
+
+		});
+
 		Vue.component('relationship', {
+			template: '#relationship-template',
+			
 			props: ['relationship', 'active'],
 
 			methods: {
@@ -46,13 +58,19 @@
 				}
 			}
 		});
+
+		
+
 		new Vue({
 			el: 'body',
 
 			data: {
-				first : '',
-				last : '',
-				fullName: '',
+				info: [
+					{ firstName: 'Arnold' },
+					{ lastName: 'Llanes'},
+				    { fullName: 'Arnold Llanes'},
+				],
+
 				relationships: [
 					{ type: 'Employer', id: 1},
 					{ type: 'Friend', id: 2},
