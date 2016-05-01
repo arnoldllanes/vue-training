@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Button testing with Vue</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<style>
+		 body{
+			  padding-top: 10px;
+			} 
+
+			.testing{
+	
+			  font-size: 20px;
+			  margin: 10px 0 0 10px;
+			  white-space: nowrap;
+			  overflow: hidden;
+			  width: 30em;
+			  animation: type 4s steps(60, end); 
+			}
+
+			.testing:nth-child(2){
+			  animation: type2 8s steps(60, end);
+			}
+
+			.testing a{
+			  color: lime;
+			  text-decoration: none;
+			}
+
+			.testing span{
+			  animation: blink 1s infinite;
+			}
+
+			@keyframes type{ 
+			  from { width: 0; } 
+			} 
+
+			@keyframes type2{
+			  0%{width: 0;}
+			  50%{width: 0;}
+			  100%{ width: 100; } 
+			} 
+
+			@keyframes blink{
+			  to{opacity: .0;}
+			}
+
+			.btn-primary {
+				background-color: green;
+			}
+
+	</style>
+</head>
+<body>
+		<h1>Contact Form</h1>
+		<button type="submit" class="btn btn-primary" @click="setEmployer">Employer</button>
+		<button type="submit" class="btn btn-primary" @click="setFriend">Friend</button>
+		<button type="submit" class="btn btn-primary" @click="setPotential">Potential Client</button>
+		<button type="submit" class="btn btn-primary" @click="setExisting">Existing Client</button><br/>
+
+		<label for="company">Company Name:</label>
+			<input type="text" id="sport" v-model="company"></input>
+		
+
+		<div v-if="relationship == 'Employer'"
+		>
+		<label for="name">Enter your name:</label>
+			<input type="text" v-model="name"></input>
+
+		<p class="testing" v-if="relationship == 'Employer' && 
+				sport !== '' && 
+				name !== '' "
+			>
+				Hello {{ name }}, I would love to hear more about {{ company }}!!! If you have any questions of me you can reach me at 858-208-9545 or you may reference a pdf of my resume here <a href="http://www.google.com">Resume</a>. Thank you for vising my website, and I hope to hear from you soon. Thanks! <span>|</span>
+			</p>
+		</div>
+
+
+
+		<div v-if="relationship == 100">
+			Dam I got {{ relationship }}! relationship
+		</div>
+
+		<div v-if="relationship === 150">
+			Alright! I got {{ relationship }} relationship !!
+		</div>
+
+		<div v-if="relationship === 300">
+			Woohoo! I got {{ relationship }} relationship!!!
+		</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+
+	<script>
+		new Vue({
+			el: 'body',
+
+			data: {
+				relationship: '',
+				company: '',
+				name: ''
+			},
+
+			computed: {
+				skill: function() {
+					if(this.relationship == 'Employer') {
+						return 'First';
+					}
+					else if(this.relationship == 'Friend'){
+						return 'Second';
+					}
+					else if(this.relationship == 'Potential Client') {
+						return 'Third'
+					}
+
+					return 'Fourth';
+				}
+			},
+
+			methods: {
+				setEmployer: function () {
+					this.relationship = 'Employer';
+				},
+
+				setFriend: function() {
+					this.relationship = 'Friend';
+				},
+
+				setPotential: function() {
+					this.relationship = 'Potential Client';
+				},
+
+				setExisting: function(){
+					this.relationship = 'Existing Client';
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>
