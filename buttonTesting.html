@@ -10,17 +10,29 @@
 			} 
 
 			.testing{
-	
+			  font-family: "Courier";
 			  font-size: 20px;
 			  margin: 10px 0 0 10px;
 			  white-space: nowrap;
 			  overflow: hidden;
-			  width: 30em;
+			  width: 50em;
 			  animation: type 4s steps(60, end); 
 			}
 
 			.testing:nth-child(2){
 			  animation: type2 8s steps(60, end);
+			}
+
+			.testing:nth-child(3){
+				animation: type2 16s steps(60,end);
+			}
+
+			.testing:nth-child(4){
+				animation: type2 16s steps(60,end);
+			}
+
+			.testing:nth-child(5){
+				animation: type2 60s steps(60,end);
 			}
 
 			.testing a{
@@ -63,32 +75,59 @@
 			<input type="text" id="sport" v-model="company"></input>
 		
 
-		<div v-if="relationship == 'Employer'"
-		>
-		<label for="name">Enter your name:</label>
-			<input type="text" v-model="name"></input>
+		<div v-if="relationship == 'Employer'">
+			<label for="name">Enter your Name:</label>
+				<input type="text" v-model="name"></input><br/>
 
-		<p class="testing" v-if="relationship == 'Employer' && 
-				sport !== '' && 
-				name !== '' "
-			>
-				Hello {{ name }}, I would love to hear more about {{ company }}!!! If you have any questions of me you can reach me at 858-208-9545 or you may reference a pdf of my resume here <a href="http://www.google.com">Resume</a>. Thank you for vising my website, and I hope to hear from you soon. Thanks! <span>|</span>
+			<label for="phone">Telephone Number:</label>
+				<input type="text" v-model="phone" id="phone" placeholder="eg.) (555)555-5555"></input><br/>
+
+			<label for="email">Email:</label>
+				<input type="email" v-model="email" id="email" placeholder="eg.) sample@sample.com"></input><br/>
+
+			<label for="message">Your message:</label>
+
+			<textarea id="message"></textarea>
+
+			
+
+		</div>
+
+		<div class="testing" v-if="relationship === 'Employer' && 
+		name !== '' &&
+		company !== ''
+		">
+			<p class="testing">
+				Hello {{ name }}, I would like to hear more about {{ company }}.
+			</p>
+			<p class="testing">
+				If you would like to know more about me, 
+			</p>
+			<p class="testing">
+				Please review my resume here <a target="__blank" href="http://www.google.com">Resume</a><span>|</span>
 			</p>
 		</div>
 
+		
 
 
-		<div v-if="relationship == 100">
-			Dam I got {{ relationship }}! relationship
+
+		<!-- <div v-if="relationship == 'Employer'">
+			This works for {{ relationship }}
 		</div>
 
-		<div v-if="relationship === 150">
-			Alright! I got {{ relationship }} relationship !!
+		<div v-if="relationship === 'Friend'">
+			This works for {{ relationship }}
 		</div>
 
-		<div v-if="relationship === 300">
-			Woohoo! I got {{ relationship }} relationship!!!
+		<div v-if="relationship === 'Potential Client'">
+			This works for {{ relationship }}
 		</div>
+
+		<div v-if="relationship === 'Existing Client'">
+			This works for {{ relationship }}
+		</div> -->
+		
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
 
@@ -97,25 +136,9 @@
 			el: 'body',
 
 			data: {
-				relationship: '',
-				company: '',
-				name: ''
-			},
-
-			computed: {
-				skill: function() {
-					if(this.relationship == 'Employer') {
-						return 'First';
-					}
-					else if(this.relationship == 'Friend'){
-						return 'Second';
-					}
-					else if(this.relationship == 'Potential Client') {
-						return 'Third'
-					}
-
-					return 'Fourth';
-				}
+				relationship: 'Employer',
+				company: 'Test company',
+				name: 'Arnold'
 			},
 
 			methods: {
@@ -133,7 +156,7 @@
 
 				setExisting: function(){
 					this.relationship = 'Existing Client';
-				}
+				},
 			}
 		});
 
