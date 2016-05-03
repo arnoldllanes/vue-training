@@ -4,110 +4,81 @@
 	<title>Button testing with Vue</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<style>
-		 body{
-			  padding-top: 10px;
-			} 
-
-			.testing{
-			  font-family: "Courier";
-			  font-size: 20px;
-			  margin: 10px 0 0 10px;
-			  white-space: nowrap;
-			  overflow: hidden;
-			  width: 50em;
-			  animation: type 4s steps(60, end); 
-			}
-
-			.testing:nth-child(2){
-			  animation: type2 8s steps(60, end);
-			}
-
-			.testing:nth-child(3){
-				animation: type2 16s steps(60,end);
-			}
-
-			.testing:nth-child(4){
-				animation: type2 16s steps(60,end);
-			}
-
-			.testing:nth-child(5){
-				animation: type2 60s steps(60,end);
-			}
-
-			.testing a{
-			  color: lime;
-			  text-decoration: none;
-			}
-
-			.testing span{
-			  animation: blink 1s infinite;
-			}
-
-			@keyframes type{ 
-			  from { width: 0; } 
-			} 
-
-			@keyframes type2{
-			  0%{width: 0;}
-			  50%{width: 0;}
-			  100%{ width: 100; } 
-			} 
-
-			@keyframes blink{
-			  to{opacity: .0;}
-			}
-
-			.btn-primary {
-				background-color: green;
-			}
-
-	</style>
+	<link rel="stylesheet" type="text/css" href="./animate.css">
 </head>
 <body>
+	<div class="container">
 		<h1>Contact Form</h1>
 		<button type="submit" class="btn btn-primary" @click="setEmployer">Employer</button>
 		<button type="submit" class="btn btn-primary" @click="setFriend">Friend</button>
 		<button type="submit" class="btn btn-primary" @click="setPotential">Potential Client</button>
-		<button type="submit" class="btn btn-primary" @click="setExisting">Existing Client</button><br/>
-
-		<label for="company">Company Name:</label>
-			<input type="text" id="sport" v-model="company"></input>
-		
+		<button type="submit" class="btn btn-primary" @click="setExisting">Existing Client</button><br/><br/>
 
 		<div v-if="relationship == 'Employer'">
-			<label for="name">Enter your Name:</label>
-				<input type="text" v-model="name"></input><br/>
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<label for="company" class="col-md-1 control-label">Company:</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" id="company" v-model="company"></input>
+					</div>
+				</div>
 
-			<label for="phone">Telephone Number:</label>
-				<input type="text" v-model="phone" id="phone" placeholder="eg.) (555)555-5555"></input><br/>
+				<div class="form-group">
+					<label for="name" class="col-md-1 control-label">Name:</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" id="name" v-model="name"></input>
+					</div>
+				</div>
 
-			<label for="email">Email:</label>
-				<input type="email" v-model="email" id="email" placeholder="eg.) sample@sample.com"></input><br/>
+				<div class="form-group">
+					<label for="phone" class="col-md-1 control-label">Phone:</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" v-model="phone" id="phone" placeholder="eg.) (555)555-5555"></input>
+					</div>
+				</div>
 
-			<label for="message">Your message:</label>
+				<div class="form-group">
+					<label for="email" class="col-md-1 control-label">Email:</label>
+						<div class="col-md-8">
+							<input type="email" class="form-control" v-model="email" id="email" placeholder="eg.) sample@sample.com"></input>
+						</div>
+				</div>
 
-			<textarea id="message"></textarea>
+				<div class="form-group">
+					<label for="message" class="col-md-1 control-label">Message:</label>
+					<div class="col-md-8">
+						<textarea id="message" class="form-control"></textarea>
+					</div>
+				</div>
 
-			
-
+				<button type="submit" class="btn btn-primary">Email Arnold</button>
+			</form>
 		</div>
 
-		<div class="testing" v-if="relationship === 'Employer' && 
-		name !== '' &&
-		company !== ''
-		">
-			<p class="testing">
-				Hello {{ name }}, I would like to hear more about {{ company }}.
-			</p>
-			<p class="testing">
-				If you would like to know more about me, 
-			</p>
-			<p class="testing">
-				Please review my resume here <a target="__blank" href="http://www.google.com">Resume</a><span>|</span>
-			</p>
-		</div>
+		
+			<div v-if="relationship === 'Employer' && 
+			name !== '' &&
+			company !== ''
+			">
+				<p class="animated wobble message-from">Message From Arnold:</p>
+			</div>
 
+			<div v-if="relationship === 'Employer' && 
+			name !== '' &&
+			company !== ''
+			">
+				<p class="testing">
+					Hello {{ name }}, I would like to hear more about {{ company }}.
+				</p>
+				<p class="testing">
+					If you would like to know more about me, 
+				</p>
+				<p class="testing">
+					Please review my resume here <a target="__blank" href="http://www.google.com">Resume</a><span>|</span>
+				</p>
+			</div>
+
+</div>
 		
 
 
@@ -133,12 +104,12 @@
 
 	<script>
 		new Vue({
-			el: 'body',
+			el: '.container',
 
 			data: {
-				relationship: 'Employer',
-				company: 'Test company',
-				name: 'Arnold'
+				relationship: '',
+				company: '',
+				name: ''
 			},
 
 			methods: {
